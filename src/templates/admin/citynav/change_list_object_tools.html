@@ -1,0 +1,19 @@
+{% extends 'admin/change_list_object_tools.html' %}
+
+{% load i18n admin_urls %}
+
+
+{% block object-tools-items %}
+  {% if has_add_permission %}
+  <li>
+    {% url 'admin:citynav_import_routes' as citynav_import_routes %}
+    <a href="{% add_preserved_filters citynav_import_routes %}" class="addlink">
+      {% trans 'import routes' %}
+    </a>
+    {% url cl.opts|admin_urlname:'add' as add_url %}
+    <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
+      {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+    </a>
+  </li>
+  {% endif %}
+{% endblock %}

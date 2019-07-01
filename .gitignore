@@ -1,0 +1,36 @@
+# PyCharm
+.idea/
+
+# Compiled python files
+*.py[cod]
+
+# Translated files
+*.mo
+*.pot
+
+.env
+
+docker-compose*override.yml
+
+conf/**
+!conf/.gitkeep
+
+var/log/**
+!var/log/.gitkeep
+
+var/media/**
+!var/media/.gitkeep
+
+var/static/**
+!var/static/.gitkeep
+
+var/tmp/**
+!var/tmp/.gitkeep
+
+var/dev/**
+!var/dev/.gitkeep
+
+var/reload
+
+# macOS files
+*.DS_Store

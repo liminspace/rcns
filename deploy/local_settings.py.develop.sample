@@ -1,0 +1,53 @@
+from unipath import Path
+
+
+CONF_DIR = Path(__file__).parent.absolute()  # repository root dir
+
+DEBUG = True
+# EMAIL_DEBUG = DEBUG
+INTERNAL_IPS = ['*']
+
+ALLOWED_HOSTS = ['navsys.local']
+
+ADMINS = [
+    ('Admin', 'admin@navsys.local'),
+]
+
+DB_NAME = 'navsys'
+DB_USER = 'navsys'
+DB_PASS = 'postgres'
+DB_HOST = 'postgres'
+# DB_PORT = '5432'
+
+DEFAULT_REDIS_HOST = 'redis'
+# DEFAULT_REDIS_PORT = 6379
+# DEFAULT_REDIS_PASSWORD = None
+
+# CACHE_REDIS_HOST = DEFAULT_REDIS_HOST
+# CACHE_REDIS_PORT = DEFAULT_REDIS_PORT
+# CACHE_REDIS_DB = 1
+# CACHE_REDIS_PASSWORD = DEFAULT_REDIS_PASSWORD
+
+# SESSION_REDIS_HOST = DEFAULT_REDIS_HOST
+# SESSION_REDIS_PORT = DEFAULT_REDIS_PORT
+# SESSION_REDIS_DB = 2
+# SESSION_REDIS_PASSWORD = DEFAULT_REDIS_PASSWORD
+
+# CACHE_ENABLED = False
+# CACHE_DEFAULT_TIMEOUT = 3600
+
+# TIME_ZONE = 'Europe/Kiev'
+# LANGUAGE_CODE = 'en'
+
+# python -c"import string as s,random as r;print ''.join([r.choice(s.letters+s.digits+s.punctuation)for _ in range(50)])"
+SECRET_KEY = 'dev'
+
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
+# EMAIL_USE_TLS = False
+EMAIL_HOST_USER = 'no.reply@navsys.local'
+# EMAIL_HOST_PASSWORD = ''
+
+EMAIL_SUBJECT_PREFIX = 'NavSys: '
+DEFAULT_FROM_EMAIL = f'NavSys <{EMAIL_HOST_USER}>'
+# SERVER_EMAIL = DEFAULT_FROM_EMAIL

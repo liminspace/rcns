@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block base_title %}
+    Robot City Navigation System
+{% endblock %}
+
+
+{% block base_container %}
+    <div class="alert alert-secondary">
+        <h4 class="alert-heading">Upload your routes!</h4>
+        <p>
+            To do this go to <a href="{% url 'admin:citynav_route_changelist' %}">here</a> and click
+            <b>'Import routes'</b> button. Then upload the file you can find in the directory <b>'example'</b>.
+        </p>
+    </div>
+
+    <form class="form-inline" action="{% url 'home' %}" method="get">
+        <div class="form-group">
+            <label for="id_start_point">Start point</label>
+            <input type="text" name="start_point" id="id_start_point" class="form-control mx-sm-3"
+                   placeholder="x1, y1" value="{{ form.start_point.value|default:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="id_end_point">End point</label>
+            <input type="text" name="end_point" id="id_end_point" class="form-control mx-sm-3"
+                   placeholder="x2, y2" value="{{ form.end_point.value|default:'' }}">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Get route</button>
+        </div>
+    </form>
+
+    <hr>
+
+    {% if route %}
+        <div class="alert alert-success">
+            <h4 class="alert-heading">
+                Route from ({{ route.start_x }}, {{ route.start_y }}) to ({{ route.end_x }}, {{ route.end_y }})
+            </h4>
+            <ul>
+                {% for item in route.get_navigator.get_readable_instructions %}
+                    <li>
+                        {{ item }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% elif form.is_valid %}
+        <p class="text-muted">
+            The route not found
+        </p>
+    {% else %}
+        <p class="text-muted">
+            Enter start and end point coordinates and try to get a route
+        </p>
+    {% endif %}
+{% endblock %}

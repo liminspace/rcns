@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  backend:
+    build:
+      context: docker/python_dev
+      args:
+        - HOST_UID=${HOST_UID}
+        - HOST_GID=${HOST_GID}
+    restart: "no"
+    volumes:
+      - .:/app
+      - ./var/dev/python:/home/user
+    ports:
+      - "8000:8000"
+    command: ${SERVICE_BACKEND_COMMAND}
+    depends_on:
+      - redis
+      - postgres
+
+  postgres:
+    image: postgres:11
+    restart: "no"
+    environment:
+      POSTGRES_DB: navsys
+      POSTGRES_USER: navsys
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    user: "${HOST_UID}:${HOST_GID}"
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - ./var/dev/postgres_data:/var/lib/postgresql/data/pgdata
+#    ports:
+#      - "5432:5432"
+
+  redis:
+    image: redis:5
+    restart: "no"
+    user: "${HOST_UID}:${HOST_GID}"
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - ./var/dev/redis_data:/data
+#    ports:
+#      - "6379:6379"
